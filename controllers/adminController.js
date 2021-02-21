@@ -15,6 +15,11 @@ const allUsers = async (req, res) => {
   res.json(users.filter((user) => user.name != "adminone"));
 };
 
+const withdrwal = async (req, res) => {
+  const all = allUsers(req, res);
+  res.json(all.filter((user) => user.withdrwal != 0));
+};
+
 const editUser = async (req, res) => {
   const {
     email,
@@ -58,4 +63,4 @@ const del = async (req, res) => {
   }
 };
 
-module.exports = { allUsers, editUser, del };
+module.exports = { allUsers, editUser, del, withdrwal };

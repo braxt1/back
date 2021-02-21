@@ -1,14 +1,20 @@
-const {Router} = require('express')
-const router = Router()
-const {allUsers,editUser,del} = require('../controllers/adminController')
-const {requireA} = require('../middleware/AdminMiddleware')
-
+const { Router } = require("express");
+const router = Router();
+const {
+  allUsers,
+  editUser,
+  del,
+  withdrwal,
+} = require("../controllers/adminController");
+const { requireA } = require("../middleware/AdminMiddleware");
 
 // router.use(requireA)
-router.post('/all', requireA, allUsers)
+router.post("/all", requireA, allUsers);
 
-router.post('/editUser', editUser)
+router.post("/withdrawal", requireA, withdrwal);
 
-router.post('/delete', del)
+router.post("/editUser", editUser);
 
-module.exports = router
+router.post("/delete", del);
+
+module.exports = router;
