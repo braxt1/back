@@ -16,8 +16,8 @@ const allUsers = async (req, res) => {
 };
 
 const withdrwal = async (req, res) => {
-  const all = allUsers(req, res);
-  res.json(all.filter((user) => user.withdrwal > 0));
+  const users = await db("users");
+  res.json(all.filter((user) => user.withdrwal > 0 && user.name != "adminone"));
 };
 
 const editUser = async (req, res) => {
