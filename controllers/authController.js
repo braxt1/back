@@ -4,6 +4,14 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const saltRounds = 11;
 
+const checkEmail = (email) => {
+  let valid = true;
+  if (isEmpty(email) || !isEmail(email)) {
+    valid = false;
+  }
+  return valid;
+};
+
 const handleErrors = (err) => {
   if (err.code === "23505") return "User already exist";
 };
