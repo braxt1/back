@@ -74,15 +74,7 @@ module.exports.signup = (req, res) => {
 module.exports.user = async (req, res) => {
   const { email } = req.body;
   const userz = await db.select("*").from("users").where({ email });
-  const {
-    name,
-    email,
-    deposit,
-    admin,
-    profits,
-    withdrwal,
-    referral,
-  } = userz[0];
+  const { name, deposit, admin, profits, withdrwal, referral } = userz[0];
   const user = { name, email, deposit, admin, profits, withdrwal, referral };
   res.json(user);
 };
