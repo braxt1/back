@@ -134,7 +134,7 @@ module.exports.withdraw = async (req, res) => {
       res.json({ err: "try again later?" });
     }
   } else {
-    res.json({ err: "invalid email" });
+    res.json({ err: "nvalid email" });
   }
 };
 
