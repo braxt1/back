@@ -145,10 +145,8 @@ module.exports.changePassword = async (req, res) => {
 
   if (checkEmail(email)) {
     try {
-      //returns 1 if done
       const isDone = await db("users").where({ email }).update({
         email,
-        accbal,
         pwd: hash,
       });
       res.json(isDone);
