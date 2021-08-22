@@ -23,15 +23,8 @@ const withdrwal = async (req, res) => {
 };
 
 const editUser = async (req, res) => {
-  const {
-    email,
-    name,
-    deposit,
-    profits,
-    withdrwal,
-    referral,
-    joined,
-  } = req.body;
+  const { email, name, deposit, profits, withdrwal, referral, joined } =
+    req.body;
 
   console.log("edit emaila", req.body);
 

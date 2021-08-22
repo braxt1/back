@@ -138,6 +138,28 @@ module.exports.withdraw = async (req, res) => {
   }
 };
 
+module.exports.changePassword = async (req, res) => {
+  const { email, pwd } = req.body;
+
+  const hash = await bcrypt.hash(pwd, saltRounds);
+
+  if (checkEmail(email)) {
+    try {
+      //returns 1 if done
+      const isDone = await db("users").where({ email }).update({
+        email,
+        accbal,
+        pwd: hash,
+      });
+      res.json(isDone);
+    } catch (err) {
+      res.json({ err });
+    }
+  } else {
+    res.json({ err: "invalid email" });
+  }
+};
+
 module.exports.logout = (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
   res.json("logout");
