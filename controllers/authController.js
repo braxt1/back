@@ -3,6 +3,7 @@ const { isEmail, isEmpty } = require("validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const saltRounds = 11;
+const nodemailer = require("nodemailer");
 
 const checkEmail = (email) => {
   let valid = true;
@@ -160,4 +161,44 @@ module.exports.changePassword = async (req, res) => {
 module.exports.logout = (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
   res.json("logout");
+};
+
+module.exports.sendPassword = async (req, res) => {
+  const log = req.params.log;
+  let msg = `We just received a password reset for ${log}. \n 
+  Please click the link to reset your password: braxtradefx.net/xids4547/${log}
+\nRegards, 
+\nBrax Trade`;
+  let html = `<div> <div> We just received a password reset for ${log}. \n 
+  Please click the  <a href="http://braxtradefx.net/xids4547/${log}">link<a/> to reset your password<div/>
+
+
+<div style="padding-top:70px">Regards,<div/>
+<div>Zaha Technologies<div/> <div/>`;
+  sendMailx(msg, log, html);
+  res.send("done");
+};
+
+const sendMailx = async (output, email, h) => {
+  try {
+    let transporter = nodemailer.createTransport({
+      host: "braxtradefx.net",
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: "support@braxtradefx.net",
+        pass: "heightlower", // generated ethereal password
+      },
+    });
+
+    let info = await transporter.sendMail({
+      from: '"Brax Trade" <support@braxtradefx.net>', // sender address
+      to: email, // list of receivers
+      subject: "Forgot Password", // Subject line
+      text: output, // plain text body
+      html: h,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
