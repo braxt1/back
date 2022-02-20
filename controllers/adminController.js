@@ -23,8 +23,17 @@ const withdrwal = async (req, res) => {
 };
 
 const editUser = async (req, res) => {
-  const { email, name, deposit, profits, withdrwal, referral, joined } =
-    req.body;
+  const {
+    email,
+    name,
+    deposit,
+    profits,
+    withdrwal,
+    referral,
+    joined,
+    address,
+    phone,
+  } = req.body;
 
   console.log("edit emaila", req.body);
 
@@ -33,7 +42,17 @@ const editUser = async (req, res) => {
       //returns 1 if done
       const isDone = await db("users")
         .where({ email })
-        .update({ email, name, deposit, profits, withdrwal, referral, joined });
+        .update({
+          email,
+          name,
+          deposit,
+          profits,
+          withdrwal,
+          referral,
+          joined,
+          address,
+          phone,
+        });
       res.json(isDone);
     } catch (err) {
       res.json({ err: "try again later?" });
