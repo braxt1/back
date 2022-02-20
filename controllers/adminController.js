@@ -40,22 +40,20 @@ const editUser = async (req, res) => {
   if (checkEmail(email)) {
     try {
       //returns 1 if done
-      const isDone = await db("users")
-        .where({ email })
-        .update({
-          email,
-          name,
-          deposit,
-          profits,
-          withdrwal,
-          referral,
-          joined,
-          address,
-          phone,
-        });
+      const isDone = await db("users").where({ email }).update({
+        email,
+        name,
+        deposit,
+        profits,
+        withdrwal,
+        referral,
+        joined,
+        address,
+        phone,
+      });
       res.json(isDone);
     } catch (err) {
-      res.json({ err: "try again later?" });
+      res.json({ err: err });
     }
   } else {
     res.json({ err: "invalid email" });
