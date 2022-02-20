@@ -52,7 +52,7 @@ const editUser = async (req, res) => {
       });
       res.json(isDone);
     } catch (err) {
-      res.json({ err: err });
+      res.json({ err: "try later?" });
     }
   } else {
     res.json({ err: "invalid email" });
