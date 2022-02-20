@@ -39,7 +39,7 @@ const createToken = (obj) => {
   });
 };
 module.exports.signup = (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, address, phone } = req.body;
   const msg = checkUserDetails({ name, email, password });
   if (msg.name !== "" || msg.email !== "" || msg.password !== "") {
     res.status(400).json({ msg });
@@ -58,6 +58,8 @@ module.exports.signup = (req, res) => {
             profits: 0,
             withdrwal: 0,
             referral: 0,
+            address,
+            phone,
           })
           .then((user) => {
             const token = createToken({ email, admin: false });
