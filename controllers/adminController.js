@@ -47,7 +47,6 @@ const editUser = async (req, res) => {
         profits,
         withdrwal,
         referral,
-        joined,
         address,
         phone,
       });
