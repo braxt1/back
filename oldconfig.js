@@ -2,11 +2,18 @@ require("dotenv").config();
 const db = require("knex")({
   client: "pg",
   connection: {
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
+    host: '',
+    user: 'crypwbbt_root',
+    password: 'Notreally$',
+    database: 'crypwbbt_azcrypt',
+    port: 5432
   },
-});
+})
 
+const b = async () => {
+  const a = await db("users")
+  console.log({ a });
+}
+
+b()
 module.exports = db;
